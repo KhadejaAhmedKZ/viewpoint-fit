@@ -354,6 +354,32 @@ export function PoseCoach() {
           : "Get ready";
   const reps = phase === "complete" ? (summary?.stats.reps ?? det.reps) : det.reps;
 
+  // Auto-start: once the full body stays in view for the countdown, begin the session
+  // hands-free (the Start button is out of reach when standing back from the camera).
+  const autoArmed = cam === "active" && phase === "pre" && bodyReady && !pendingSwitch;
+  const [countdown, setCountdown] = useState<number | null>(null);
+  const startSessionRef = useRef(startSession);
+  startSessionRef.current = startSession;
+  useEffect(() => {
+    if (!autoArmed) {
+      setCountdown(null);
+      return;
+    }
+    let left = poseConfig.autoStartSeconds;
+    setCountdown(left);
+    const id = setInterval(() => {
+      left -= 1;
+      if (left > 0) {
+        setCountdown(left);
+        return;
+      }
+      clearInterval(id);
+      setCountdown(null);
+      startSessionRef.current();
+    }, 1000);
+    return () => clearInterval(id);
+  }, [autoArmed]);
+
   return (
     <div className="space-y-4">
       <section>
@@ -499,6 +525,25 @@ export function PoseCoach() {
                     )}
                   </StatusChip>
                 </div>
+                {countdown !== null && (
+                  <div
+                    className="pointer-events-none absolute inset-0 grid place-items-center"
+                    role="status"
+                    aria-live="assertive"
+                  >
+                    <div className="animate-pop-in text-center">
+                      <span
+                        key={countdown}
+                        className="block text-8xl font-bold leading-none text-surface drop-shadow-[0_4px_0_var(--color-ink,#000)]"
+                      >
+                        {countdown}
+                      </span>
+                      <span className="vp-label mt-2 inline-block rounded-xl border-[3px] border-ink bg-yellow px-3 py-1 text-ink">
+                        Starting — hold your position
+                      </span>
+                    </div>
+                  </div>
+                )}
                 {feedback && (
                   <p
                     key={feedback.id}
@@ -630,9 +675,10 @@ export function PoseCoach() {
                       <>
                         <Check className="h-4 w-4" strokeWidth={4} />{" "}
                         {ex.usesSide ? "Arm detected ✓" : "Full body detected ✓"}
+                        {countdown !== null && ` Starting in ${countdown}…`}
                       </>
                     ) : (
-                      `Get ready — ${ex.framing.toLowerCase()}`
+                      `Get ready — ${ex.framing.toLowerCase()} (starts automatically)`
                     )}
                   </p>
                   <GameButton

@@ -9,8 +9,8 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // GitHub Pages build (static SPA served under /<repo>/). Set GITHUB_PAGES=1 and
 // optionally PAGES_BASE=/repo-name. Server functions (Live Coach, food photo AI)
 // are unavailable on Pages; the app falls back to its offline guidance.
-const pages = !!process.env.GITHUB_PAGES;
-const pagesBase = process.env.PAGES_BASE ?? "/viewpoint-fit";
+const pages = !!process.env["GITHUB_PAGES"];
+const pagesBase = process.env["PAGES_BASE"] ?? "/viewpoint-fit";
 
 export default defineConfig(
   pages
