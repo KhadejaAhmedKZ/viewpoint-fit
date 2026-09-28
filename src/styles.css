@@ -1,0 +1,322 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * VIEW POINT FIT — BRIGHT NEO-BRUTALIST CYBER-POP WELLNESS GAME.
+ * Electric yellow hero, cream world, white cards, dark-purple ink outlines.
+ * All colors are tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+
+  --font-display: "Chakra Petch", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ink: var(--ink);
+  --color-cyan: var(--cyber-cyan);
+  --color-lime: var(--cyber-green);
+  --color-yellow: var(--electric-yellow);
+  --color-pink: var(--cyber-pink);
+  --color-purple: var(--purple-accent);
+  --color-cream: var(--warm-cream);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+
+  --animate-press: vp-press 0.25s ease-out;
+  --animate-xp-pulse: vp-xp-pulse 2.4s ease-in-out infinite;
+  --animate-shake: vp-shake 0.4s ease-in-out;
+  --animate-check: vp-check 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+  --animate-bar: vp-bar 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-nav-pop: vp-nav-pop 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+  --animate-float: vp-float 4s ease-in-out infinite;
+  --animate-toast: vp-toast 1.8s ease-out both;
+  --animate-confetti: vp-confetti 1.4s ease-out both;
+  --animate-pop-in: vp-pop-in 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+:root {
+  --radius: 1rem;
+
+  /* #24152F dark purple ink */
+  --ink: oklch(0.22 0.05 310);
+  /* #FFE600 */
+  --electric-yellow: oklch(0.92 0.19 102);
+  --electric-yellow-soft: oklch(0.96 0.1 102);
+  /* #FF007A */
+  --cyber-pink: oklch(0.64 0.26 0);
+  /* #00D9E8 */
+  --cyber-cyan: oklch(0.81 0.14 203);
+  /* #00C853 */
+  --cyber-green: oklch(0.72 0.2 150);
+  /* #7B2CBF */
+  --purple-accent: oklch(0.48 0.22 303);
+  /* #FFF9E6 */
+  --warm-cream: oklch(0.985 0.025 95);
+
+  --background: var(--warm-cream);
+  --foreground: var(--ink);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.965 0.03 95);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+
+  --primary: var(--electric-yellow);
+  --primary-foreground: var(--ink);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.95 0.02 95);
+  --muted-foreground: oklch(0.45 0.04 310);
+  --accent: var(--cyber-cyan);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.6 0.23 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: var(--ink);
+  --input: var(--ink);
+  --ring: var(--cyber-pink);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--ink) 13%, transparent) 1.2px,
+      transparent 1.4px
+    );
+    background-size: 22px 22px;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Thick-outlined white game card */
+@utility vp-card {
+  background-color: var(--surface);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-xl);
+}
+
+@utility vp-pop {
+  box-shadow: 4px 4px 0 0 var(--ink);
+}
+
+@utility vp-pop-lg {
+  box-shadow: 7px 7px 0 0 var(--ink);
+}
+
+@utility vp-label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* Tactile press: sink into the shadow */
+@utility vp-press {
+  transition:
+    transform 0.12s ease-out,
+    box-shadow 0.12s ease-out;
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0 0 var(--ink);
+  }
+}
+
+/* Lift on hover (pointer devices) */
+@utility vp-lift {
+  transition:
+    transform 0.15s ease-out,
+    box-shadow 0.15s ease-out;
+  @media (hover: hover) {
+    &:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 0 var(--ink);
+    }
+  }
+}
+
+/* Halftone dot texture for hero surfaces */
+@utility vp-dots {
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--ink) 16%, transparent) 1.4px,
+    transparent 1.6px
+  );
+  background-size: 14px 14px;
+}
+
+@utility vp-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--ink) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--ink) 10%, transparent) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@utility vp-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--ink) 9%, transparent) 0 6px,
+    transparent 6px 14px
+  );
+}
+
+@keyframes vp-press {
+  50% {
+    transform: translate(2px, 2px);
+  }
+}
+@keyframes vp-xp-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+@keyframes vp-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px) rotate(-1deg);
+  }
+  40% {
+    transform: translateX(6px) rotate(1deg);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+@keyframes vp-check {
+  0% {
+    transform: scale(0.3) rotate(-20deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+@keyframes vp-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes vp-nav-pop {
+  0% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes vp-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--r, 0deg));
+  }
+  50% {
+    transform: translateY(-5px) rotate(var(--r, 0deg));
+  }
+}
+
+@keyframes vp-toast {
+  0% { transform: translate(-50%, 20px) scale(0.8); opacity: 0; }
+  15% { transform: translate(-50%, 0) scale(1.05); opacity: 1; }
+  80% { transform: translate(-50%, -6px) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -30px); opacity: 0; }
+}
+@keyframes vp-confetti {
+  0% { transform: translate(0, 0) rotate(0); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
+}
+@keyframes vp-pop-in {
+  0% { transform: scale(0.6) rotate(-4deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Device-local accessibility preferences. */
+html.a11y-largeText { font-size: 125%; }
+html.a11y-reducedMotion *, html.a11y-reducedMotion *::before, html.a11y-reducedMotion *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html.a11y-highContrast { --ink:#000; --foreground:#000; --background:#fff; --warm-cream:#fff; --surface:#fff; --surface-2:#fff; --card:#fff; --card-foreground:#000; --muted-foreground:#000; --electric-yellow:#ffe600; --cyber-pink:#ffc4e0; --cyber-cyan:#b9f7ff; --purple-accent:#dfc7ff; }
+html.a11y-highContrast body { background-image:none; }
+html.a11y-highContrast :is(p,span,label,h1,h2,h3,h4,a,button) { text-shadow:none; }
+.a11y-toolbar { position:fixed; right:12px; bottom:90px; z-index:45; display:flex; flex-wrap:wrap; gap:6px; max-width:calc(100vw - 24px); }
+.a11y-button { border:2px solid var(--ink); background:var(--surface); color:var(--ink); border-radius:10px; padding:10px 14px; min-height:44px; font-weight:700; }
+.a11y-button[aria-checked=true], .a11y-button[aria-pressed=true] { background:var(--electric-yellow); }
+.a11y-button:disabled { opacity:.5; }
+:focus-visible { outline:3px solid var(--ink); outline-offset:4px; }
+.a11y-skip { position:fixed; top:-100px; left:12px; z-index:100; background:var(--electric-yellow); color:var(--ink); padding:12px; }
+.a11y-skip:focus { top:12px; }
+.a11y-camera { position:fixed; width:1px; height:1px; pointer-events:none; opacity:0; }
+.a11y-cursor { position:fixed; top:-12px; left:-12px; width:24px; height:24px; border:4px solid #000; background:#ffe600; border-radius:50%; z-index:200; pointer-events:none; }
+.a11y-face { position:fixed; bottom:150px; right:12px; z-index:60; max-width:min(340px,calc(100vw - 24px)); background:var(--surface); color:var(--ink); border:3px solid var(--ink); padding:12px; border-radius:12px; }
+html.a11y-highContrast [class*="bg-"] { background-color:#fff !important; color:#000 !important; }
+html.a11y-highContrast [class*="text-"] { color:#000 !important; }
+html.a11y-highContrast [class*="border-"] { border-color:#000 !important; }

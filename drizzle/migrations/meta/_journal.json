@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790360450446,
+      "tag": "0000_persistent_progress",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790361191827,
+      "tag": "0001_daily_checkin_inputs",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790460000000,
+      "tag": "0002_fuel_and_security",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1790461000000,
+      "tag": "0003_food_reports",
+      "breakpoints": true
+    }
+  ]
+}
